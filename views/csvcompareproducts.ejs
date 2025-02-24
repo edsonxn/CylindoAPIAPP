@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Compare Products</title>
+    <link rel="stylesheet" href="/Style.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #237c7c;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="/" class="button">← Back to Home</a>
+        <button onclick="downloadCSV('productComparisonTable', 'products.csv')">Download</button>
+    </div>
+    <div class="container">
+        <h1>CSV Product Comparison Results</h1>
+        <table id="productComparisonTable">
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% productsWithStatus.forEach(product => { %>
+                    <tr>
+                        <td><%= product.productCode %></td>
+                        <td><%= product.status %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function downloadCSV(tableId, filename) {
+            const table = document.getElementById(tableId);
+            if (!table) {
+                alert('Table not found');
+                return;
+            }
+
+            let csvContent = "";
+            const rows = table.querySelectorAll("tr");
+            rows.forEach(row => {
+                const cells = row.querySelectorAll("th, td");
+                const rowContent = Array.from(cells).map(cell => `"${cell.textContent.trim()}"`).join(",");
+                csvContent += rowContent + "\n";
+            });
+
+            const blob = new Blob([csvContent], { type: "text/csv" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.style.display = "none";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

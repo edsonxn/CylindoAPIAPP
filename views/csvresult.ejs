@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV Results</title>
+  <link rel="stylesheet" href="/Style.css">
+</head>
+<body>
+  <div class="top-bar">
+    <a href="/" class="button">← Back to Queries</a>
+  </div>
+  <div class="container">
+    <h1>CSV Data Results</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Code</th>
+          <th>Feature</th>
+          <th>Options</th> 
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(row => { %>
+          <tr>
+            <td><%= row.productCode %></td>
+            <td><%= row.feature %></td>
+            <td><%= row.options %></td> 
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Result</title>
+<link rel="stylesheet" href="/Style.css">
+</head>
+<body>
+  <div class="top-bar">
+    <a href="/" class="button">← Back to Queries</a>
+  </div>
+  <div class="container">
+    <h1>Query Results</h1>
+    
+    <h2>Product Information</h2>
+    <table>
+      <tr>
+        <th>Code</th>
+        <td><%= data.code %></td>
+      </tr>
+      <tr>
+        <th>Version</th>
+        <td><%= data.version %></td>
+      </tr>
+      <tr>
+        <th>Customer ID</th>
+        <td><%= data.customer %></td>
+      </tr>
+      <tr>
+        <th>Enabled</th>
+        <td><%= data.enabled %></td>
+      </tr>
+      <tr>
+        <th>Default Dimensions</th>
+        <td><%= data.defaultWidth %> x <%= data.defaultHeight %></td>
+      </tr>
+    </table>
+    
+    <h2>Features</h2>
+    <% data.features.forEach(feature => { %>
+      <h3><%= feature.name %> (<%= feature.code %>)</h3>
+      <table>
+        <tr>
+          <th>Option Code</th>
+          <th>Name</th>
+          <th>Is Default?</th>
+        </tr>
+        <% feature.options.forEach(option => { %>
+          <tr>
+            <td><%= option.code %></td>
+            <td><%= option.name %></td>
+            <td><%= option.isDefault %></td>
+          </tr>
+        <% }) %>
+      </table>
+    <% }) %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Queries</title>
+    <link rel="stylesheet" href="/Style.css">
+</head>
+
+<body>
+    <div class="top-bar">
+        <h1 class="logo">Cylindo Product Queries</h1>
+    </div>
+    <div class="container">
+        <!--  
+        <div class="card">
+            <h2>Get a Product Configuration</h2>
+            <form action="/consultar" method="POST" class="form-grid">
+                <div class="form-group">
+                    <label for="customerId">Customer ID:</label>
+                    <input type="text" id="customerId" name="customerId" required>
+                    <small>Enter your unique customer identifier.</small>
+                </div>
+                <div class="form-group">
+                    <label for="productCode">Product Code:</label>
+                    <input type="text" id="productCode" name="productCode" required>
+                    <small>Provide the product code to fetch its configuration.</small>
+                </div>
+                <button type="submit" class="button-submit">Get Product Configuration</button>
+            </form>
+        </div> 
+        <div class="card">
+            <h2>Get Customer Products List</h2>
+            <form action="/listproducts" method="POST" class="form-grid">
+                <div class="form-group">
+                    <label for="customerIdList">Customer ID:</label>
+                    <input type="text" id="customerIdList" name="customerId" required>
+                    <small>Enter your customer ID to retrieve a full list of products.</small>
+                </div>
+                <button type="submit" class="button-submit">Get Products List</button>
+            </form>
+        </div>
+        
+        <div class="card">
+            <h2>Upload CSV File</h2>
+            <form action="/uploadcsv" method="POST" enctype="multipart/form-data" class="form-grid">
+                <div class="form-group">
+                    <label for="csvFile">Choose CSV File:</label>
+                    <input type="file" id="csvFile" name="csvFile" accept=".csv" required>
+                    <small>Select a valid CSV file to process its contents.</small>
+                </div>
+                <button type="submit" class="button-submit">Upload and Process</button>
+            </form>
+        </div>
+        -->
+        <div class="card">
+            <h2>Compare CSV Features and options with API</h2>
+            <form action="/uploadcsvcompare" method="POST" enctype="multipart/form-data" class="form-grid">
+                <div class="form-group">
+                    <label for="customerId">Customer ID:</label>
+                    <input type="text" id="customerId" name="customerId" required>
+                    <label for="csvFileCompare">Choose CSV File:</label>
+                    <input type="file" id="csvFileCompare" name="csvFile" accept=".csv" required>
+                </div>
+                <button type="submit" class="button-submit">Compare CSV</button>
+            </form>
+            
+        </div>
+
+        <div class="card">
+            <h2>Compare CSV products with API</h2>
+            <form action="/uploadcsvcomparefeatures" method="POST" enctype="multipart/form-data" class="form-grid">
+                <div class="form-group">
+                    <label for="customerIdFeatures">Customer ID:</label>
+                    <input type="text" id="customerIdFeatures" name="customerId" required>
+                    <label for="csvFileCompareFeatures">Choose CSV File:</label>
+                    <input type="file" id="csvFileCompareFeatures" name="csvFile" accept=".csv" required>
+                </div>
+                <button type="submit" class="button-submit">Compare CSV Features</button>
+            </form>
+        </div>
+        
+        
+    </div>
+
+</body>
+
+</html>

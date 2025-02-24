@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products List</title>
+<link rel="stylesheet" href="/Style.css">
+</head>
+<body>
+  <div class="top-bar">
+    <a href="/" class="button">← Back to Queries</a>
+  </div>
+  <div class="container">
+    <h1>Customer Products List</h1>
+    <h2>Customer ID: <%= data.customerId %></h2>
+    <p>Number of products: <%= data.products.length %></p>
+
+    <table>
+      <tr>
+        <th>Code</th>
+        <th>Version</th>
+        <th>Name</th>
+        <th>AR Enabled</th>
+        <th>Product Type</th>
+        <th>Product ID</th>
+      </tr>
+      <% data.products.forEach(product => { %>
+        <tr>
+          <td><%= product.code %></td>
+          <td><%= product.version %></td>
+          <td><%= product.name %></td>
+          <td><%= product.arEnabled %></td>
+          <td><%= product.productType %></td>
+          <td><%= product.productId %></td>
+        </tr>
+      <% }) %>
+    </table>
+  </div>
+</body>
+</html>

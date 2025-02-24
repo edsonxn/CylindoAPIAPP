@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV Compare Results</title>
+  <link rel="stylesheet" href="/Style.css">
+  <style>
+    .green { color: green; font-weight: bold; }
+    .blue { color: blue; font-weight: bold; }
+    .red { color: red; font-weight: bold; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="/" class="button">← Back to Queries</a>
+    <button id="downloadCsv" class="btn-download">⬇️ Download Missing Products CSV</button>
+  </div>
+  
+  <div class="container">
+    <h1>Products Comparison</h1>
+    <div style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+            <th>Product Code</th>
+            <th>Product ID</th>
+            <th>Status</th>
+            <% allFeatures.forEach(feature => { %>
+                <th><%= feature %></th>
+            <% }); %>
+            <th>Missing Options</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <% productsWithStatus.forEach(product => { %>
+            <% if (product.code && 
+                !product.code.toLowerCase().includes('totals for') && 
+                !product.code.toLowerCase().includes('grand totals') && 
+                product.code.toLowerCase() !== 'product code') { %>
+                  <tr>
+                    <td class="<%= product.status %>">
+                        <% if (product.productId && product.productId !== 'N/A') { %>
+                            <a href="https://cms.cylindo.com/product?id=<%= product.productId %>" target="_blank">
+                                <%= product.code %>
+                            </a>
+                        <% } else { %>
+                            <%= product.code %>
+                        <% } %>
+                    </td>
+                    <td><%= product.productId %></td>
+                    <td><%= product.status === 'green' ? 'Exists in Cylindo and CSV' : 'Exists in CSV but not in Cylindo' %></td>
+                    
+                    <% allFeatures.forEach(feature => { %>
+                      <td class="<%= product.features[feature] && product.features[feature] !== 'N/A' && product.features[feature].split(', ').some(option => productCodesCSV.has(option.trim())) ? 'green' : '' %>">
+                        <%= product.features[feature] || 'N/A' %>
+                    </td>
+                    
+                    <% }); %>
+                    
+                    <!-- Nueva columna para opciones faltantes -->
+                    <td class="red">
+                      <%= product.missingOptions.length > 0 
+                          ? product.missingOptions.map(opt => opt.includes(':') ? opt.split(':')[1] : opt).join(', ') 
+                          : 'None' %>
+                  </td>
+                  
+                  
+                  
+                  
+                </tr>
+                
+            <% } %>
+        <% }); %>
+    </tbody>
+    
+  
+  
+    
+    
+    
+    </table>
+  </div>
+
+  </div>
+  <script>
+    document.getElementById('downloadCsv').addEventListener('click', () => {
+      window.location.href = '/downloadcsvmissing';
+    });
+  </script>
+</body>
+</html>
