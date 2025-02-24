@@ -11,12 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
-
+const port = 3080;
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
